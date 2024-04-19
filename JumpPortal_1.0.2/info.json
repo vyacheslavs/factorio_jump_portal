@@ -5,7 +5,7 @@
     "author": "Vyacheslav Shegai",
     "contact": "a@ldd.so",
     "homepage": "https://github.com/vyacheslavs/factorio_jump_portal",
-    "factorio_version": "1.1.107",
+    "factorio_version": "1.1",
     "dependencies": ["base >= 0.16"],
     "description": "This mod adds portals"
 }
