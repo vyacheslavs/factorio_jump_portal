@@ -110,7 +110,7 @@ function on_creation(event)
         local ent = entity.surface.create_entity{name="portal-fg-layer", position=entity.position, force=entity.force}
         ent.minable = false
 
-        table.insert(global.portals, { portal = entity, layer = ent})
+        table.insert(global.portals, { portal = entity, layer = ent })
     end
 end
 
@@ -127,8 +127,23 @@ function on_mined(event)
     end
 end
 
+function on_destroyed(event)
+    on_mined(event)
+    local entity = event.entity
+    if entity.name == "portal-fg-layer" then
+        for key,portal_red in pairs(global.portals) do
+            if portal_red["layer"].position.x == entity.position.x and portal_red["layer"].position.y == entity.position.y then
+                portal_red["portal"].destroy()
+                table.remove(global.portals, key)
+                break
+            end
+        end
+    end
+end
+
 script.on_event(defines.events.on_tick, tick_event)
 script.on_event(defines.events.on_built_entity, on_creation)
+script.on_event(defines.events.on_robot_built_entity, on_creation)
 script.on_event(defines.events.on_pre_player_mined_item, on_mined)
 script.on_event(defines.events.on_gui_click, guiClick)
-
+script.on_event(defines.events.on_entity_died, on_destroyed)

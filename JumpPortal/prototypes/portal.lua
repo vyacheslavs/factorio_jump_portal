@@ -17,6 +17,7 @@ data:extend({
         type = "accumulator",
         name = "portal",
         order = "a[items]-c[portal]",
+        max_health = 1050,
         minable = {mining_time = 1.5, result = "portal"},
         picture = {
           filename = "__JumpPortal__/graphics/portal.png",
